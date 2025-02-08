@@ -1,0 +1,362 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dataviz_elyes_donia package &mdash; dataviz-elyes-donia  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            dataviz-elyes-donia
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">dataviz_elyes_donia package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-dataviz_elyes_donia.ai_engine">dataviz_elyes_donia.ai_engine module</a><ul>
+<li><a class="reference internal" href="#dataviz_elyes_donia.ai_engine.call_llm_for_viz"><code class="docutils literal notranslate"><span class="pre">call_llm_for_viz()</span></code></a></li>
+<li><a class="reference internal" href="#dataviz_elyes_donia.ai_engine.detect_anomalies"><code class="docutils literal notranslate"><span class="pre">detect_anomalies()</span></code></a></li>
+<li><a class="reference internal" href="#dataviz_elyes_donia.ai_engine.exec_generated_code"><code class="docutils literal notranslate"><span class="pre">exec_generated_code()</span></code></a></li>
+<li><a class="reference internal" href="#dataviz_elyes_donia.ai_engine.generate_recommendations"><code class="docutils literal notranslate"><span class="pre">generate_recommendations()</span></code></a></li>
+<li><a class="reference internal" href="#dataviz_elyes_donia.ai_engine.initialize_ai_client"><code class="docutils literal notranslate"><span class="pre">initialize_ai_client()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-dataviz_elyes_donia.core_app">dataviz_elyes_donia.core_app module</a><ul>
+<li><a class="reference internal" href="#dataviz_elyes_donia.core_app.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-dataviz_elyes_donia.data_pipeline">dataviz_elyes_donia.data_pipeline module</a><ul>
+<li><a class="reference internal" href="#dataviz_elyes_donia.data_pipeline.load_data"><code class="docutils literal notranslate"><span class="pre">load_data()</span></code></a></li>
+<li><a class="reference internal" href="#dataviz_elyes_donia.data_pipeline.normalize_data"><code class="docutils literal notranslate"><span class="pre">normalize_data()</span></code></a></li>
+<li><a class="reference internal" href="#dataviz_elyes_donia.data_pipeline.simulate_data_stream"><code class="docutils literal notranslate"><span class="pre">simulate_data_stream()</span></code></a></li>
+<li><a class="reference internal" href="#dataviz_elyes_donia.data_pipeline.transform_variables"><code class="docutils literal notranslate"><span class="pre">transform_variables()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-dataviz_elyes_donia.kpi_dashboard">dataviz_elyes_donia.kpi_dashboard module</a><ul>
+<li><a class="reference internal" href="#dataviz_elyes_donia.kpi_dashboard.display_kpi_dashboard"><code class="docutils literal notranslate"><span class="pre">display_kpi_dashboard()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-dataviz_elyes_donia.relationship_graph">dataviz_elyes_donia.relationship_graph module</a><ul>
+<li><a class="reference internal" href="#dataviz_elyes_donia.relationship_graph.display_relationship_graph"><code class="docutils literal notranslate"><span class="pre">display_relationship_graph()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-dataviz_elyes_donia.utils">dataviz_elyes_donia.utils module</a><ul>
+<li><a class="reference internal" href="#dataviz_elyes_donia.utils.clean_dataframe"><code class="docutils literal notranslate"><span class="pre">clean_dataframe()</span></code></a></li>
+<li><a class="reference internal" href="#dataviz_elyes_donia.utils.display_dataframe_overview"><code class="docutils literal notranslate"><span class="pre">display_dataframe_overview()</span></code></a></li>
+<li><a class="reference internal" href="#dataviz_elyes_donia.utils.read_uploaded_file"><code class="docutils literal notranslate"><span class="pre">read_uploaded_file()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-dataviz_elyes_donia">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">dataviz-elyes-donia</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">dataviz_elyes_donia package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/source/dataviz_elyes_donia.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="dataviz-elyes-donia-package">
+<h1>dataviz_elyes_donia package<a class="headerlink" href="#dataviz-elyes-donia-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-dataviz_elyes_donia.ai_engine">
+<span id="dataviz-elyes-donia-ai-engine-module"></span><h2>dataviz_elyes_donia.ai_engine module<a class="headerlink" href="#module-dataviz_elyes_donia.ai_engine" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz_elyes_donia.ai_engine.call_llm_for_viz">
+<span class="sig-prename descclassname"><span class="pre">dataviz_elyes_donia.ai_engine.</span></span><span class="sig-name descname"><span class="pre">call_llm_for_viz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_prompt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dataviz_elyes_donia/ai_engine.html#call_llm_for_viz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz_elyes_donia.ai_engine.call_llm_for_viz" title="Link to this definition"></a></dt>
+<dd><p>Appelle l’IA pour générer du code Python de visualisation basé sur les données et la requête utilisateur.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – Les données à visualiser.</p></li>
+<li><p><strong>user_prompt</strong> (<em>str</em>) – Description de la visualisation souhaitée par l’utilisateur.</p></li>
+<li><p><strong>api_key</strong> (<em>str</em>) – Clé API pour accéder à l’API Claude.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Code Python généré pour la visualisation.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz_elyes_donia.ai_engine.detect_anomalies">
+<span class="sig-prename descclassname"><span class="pre">dataviz_elyes_donia.ai_engine.</span></span><span class="sig-name descname"><span class="pre">detect_anomalies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dataviz_elyes_donia/ai_engine.html#detect_anomalies"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz_elyes_donia.ai_engine.detect_anomalies" title="Link to this definition"></a></dt>
+<dd><p>Détecter des anomalies dans les données en utilisant un modèle LLM.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> – DataFrame à analyser.</p></li>
+<li><p><strong>api_key</strong> – Clé API pour accéder à l’API Claude.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Résultats de détection des anomalies.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz_elyes_donia.ai_engine.exec_generated_code">
+<span class="sig-prename descclassname"><span class="pre">dataviz_elyes_donia.ai_engine.</span></span><span class="sig-name descname"><span class="pre">exec_generated_code</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dataviz_elyes_donia/ai_engine.html#exec_generated_code"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz_elyes_donia.ai_engine.exec_generated_code" title="Link to this definition"></a></dt>
+<dd><p>Exécuter du code Python généré dynamiquement pour afficher une visualisation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>code</strong> (<em>str</em>) – Le code Python généré à exécuter.</p></li>
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – Le DataFrame utilisé par le code généré.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz_elyes_donia.ai_engine.generate_recommendations">
+<span class="sig-prename descclassname"><span class="pre">dataviz_elyes_donia.ai_engine.</span></span><span class="sig-name descname"><span class="pre">generate_recommendations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dataviz_elyes_donia/ai_engine.html#generate_recommendations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz_elyes_donia.ai_engine.generate_recommendations" title="Link to this definition"></a></dt>
+<dd><p>Générer des recommandations basées sur les données en utilisant un modèle LLM.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> – DataFrame à analyser.</p></li>
+<li><p><strong>api_key</strong> – Clé API pour accéder à l’API Claude.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Recommandations générées par l’IA.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz_elyes_donia.ai_engine.initialize_ai_client">
+<span class="sig-prename descclassname"><span class="pre">dataviz_elyes_donia.ai_engine.</span></span><span class="sig-name descname"><span class="pre">initialize_ai_client</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dataviz_elyes_donia/ai_engine.html#initialize_ai_client"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz_elyes_donia.ai_engine.initialize_ai_client" title="Link to this definition"></a></dt>
+<dd><p>Initialiser le client Anthropic (Claude).</p>
+</dd></dl>
+
+</section>
+<section id="module-dataviz_elyes_donia.core_app">
+<span id="dataviz-elyes-donia-core-app-module"></span><h2>dataviz_elyes_donia.core_app module<a class="headerlink" href="#module-dataviz_elyes_donia.core_app" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz_elyes_donia.core_app.main">
+<span class="sig-prename descclassname"><span class="pre">dataviz_elyes_donia.core_app.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dataviz_elyes_donia/core_app.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz_elyes_donia.core_app.main" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-dataviz_elyes_donia.data_pipeline">
+<span id="dataviz-elyes-donia-data-pipeline-module"></span><h2>dataviz_elyes_donia.data_pipeline module<a class="headerlink" href="#module-dataviz_elyes_donia.data_pipeline" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz_elyes_donia.data_pipeline.load_data">
+<span class="sig-prename descclassname"><span class="pre">dataviz_elyes_donia.data_pipeline.</span></span><span class="sig-name descname"><span class="pre">load_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dataviz_elyes_donia/data_pipeline.html#load_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz_elyes_donia.data_pipeline.load_data" title="Link to this definition"></a></dt>
+<dd><p>Charger les données à partir d’un fichier CSV/Excel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file</strong> – Fichier téléchargé par l’utilisateur.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>DataFrame nettoyé et prêt à l’analyse.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz_elyes_donia.data_pipeline.normalize_data">
+<span class="sig-prename descclassname"><span class="pre">dataviz_elyes_donia.data_pipeline.</span></span><span class="sig-name descname"><span class="pre">normalize_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dataviz_elyes_donia/data_pipeline.html#normalize_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz_elyes_donia.data_pipeline.normalize_data" title="Link to this definition"></a></dt>
+<dd><p>Normaliser les données numériques entre 0 et 1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>df</strong> – DataFrame à normaliser.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>DataFrame avec les colonnes numériques normalisées.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz_elyes_donia.data_pipeline.simulate_data_stream">
+<span class="sig-prename descclassname"><span class="pre">dataviz_elyes_donia.data_pipeline.</span></span><span class="sig-name descname"><span class="pre">simulate_data_stream</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dataviz_elyes_donia/data_pipeline.html#simulate_data_stream"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz_elyes_donia.data_pipeline.simulate_data_stream" title="Link to this definition"></a></dt>
+<dd><p>Simuler un flux de données en émettant des lignes une par une.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> – DataFrame source.</p></li>
+<li><p><strong>delay</strong> – Délai (en secondes) entre chaque envoi de ligne.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz_elyes_donia.data_pipeline.transform_variables">
+<span class="sig-prename descclassname"><span class="pre">dataviz_elyes_donia.data_pipeline.</span></span><span class="sig-name descname"><span class="pre">transform_variables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dataviz_elyes_donia/data_pipeline.html#transform_variables"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz_elyes_donia.data_pipeline.transform_variables" title="Link to this definition"></a></dt>
+<dd><p>Transformation des variables : création de nouvelles colonnes à partir des données existantes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>df</strong> – DataFrame à transformer.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>DataFrame enrichi de nouvelles variables.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-dataviz_elyes_donia.kpi_dashboard">
+<span id="dataviz-elyes-donia-kpi-dashboard-module"></span><h2>dataviz_elyes_donia.kpi_dashboard module<a class="headerlink" href="#module-dataviz_elyes_donia.kpi_dashboard" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz_elyes_donia.kpi_dashboard.display_kpi_dashboard">
+<span class="sig-prename descclassname"><span class="pre">dataviz_elyes_donia.kpi_dashboard.</span></span><span class="sig-name descname"><span class="pre">display_kpi_dashboard</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dataviz_elyes_donia/kpi_dashboard.html#display_kpi_dashboard"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz_elyes_donia.kpi_dashboard.display_kpi_dashboard" title="Link to this definition"></a></dt>
+<dd><p>Affiche le tableau de bord des KPI en temps réel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file</strong> – Fichier de données téléchargé par l’utilisateur.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-dataviz_elyes_donia.relationship_graph">
+<span id="dataviz-elyes-donia-relationship-graph-module"></span><h2>dataviz_elyes_donia.relationship_graph module<a class="headerlink" href="#module-dataviz_elyes_donia.relationship_graph" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz_elyes_donia.relationship_graph.display_relationship_graph">
+<span class="sig-prename descclassname"><span class="pre">dataviz_elyes_donia.relationship_graph.</span></span><span class="sig-name descname"><span class="pre">display_relationship_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dataviz_elyes_donia/relationship_graph.html#display_relationship_graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz_elyes_donia.relationship_graph.display_relationship_graph" title="Link to this definition"></a></dt>
+<dd><p>Affiche le graphe des relations entre les variables d’un DataFrame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file</strong> – Fichier de données téléchargé par l’utilisateur.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-dataviz_elyes_donia.utils">
+<span id="dataviz-elyes-donia-utils-module"></span><h2>dataviz_elyes_donia.utils module<a class="headerlink" href="#module-dataviz_elyes_donia.utils" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz_elyes_donia.utils.clean_dataframe">
+<span class="sig-prename descclassname"><span class="pre">dataviz_elyes_donia.utils.</span></span><span class="sig-name descname"><span class="pre">clean_dataframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dataviz_elyes_donia/utils.html#clean_dataframe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz_elyes_donia.utils.clean_dataframe" title="Link to this definition"></a></dt>
+<dd><p>Nettoyer un DataFrame : suppression des doublons, gestion des valeurs manquantes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>df</strong> – DataFrame à nettoyer.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>pd.DataFrame nettoyé.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz_elyes_donia.utils.display_dataframe_overview">
+<span class="sig-prename descclassname"><span class="pre">dataviz_elyes_donia.utils.</span></span><span class="sig-name descname"><span class="pre">display_dataframe_overview</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dataviz_elyes_donia/utils.html#display_dataframe_overview"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz_elyes_donia.utils.display_dataframe_overview" title="Link to this definition"></a></dt>
+<dd><p>Afficher un aperçu des données : dimensions, colonnes et premières lignes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>df</strong> – DataFrame à afficher.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz_elyes_donia.utils.read_uploaded_file">
+<span class="sig-prename descclassname"><span class="pre">dataviz_elyes_donia.utils.</span></span><span class="sig-name descname"><span class="pre">read_uploaded_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uploaded_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dataviz_elyes_donia/utils.html#read_uploaded_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz_elyes_donia.utils.read_uploaded_file" title="Link to this definition"></a></dt>
+<dd><p>Lire un fichier CSV ou Excel et le convertir en DataFrame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>uploaded_file</strong> – Fichier téléchargé par l’utilisateur.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>pd.DataFrame ou None en cas d’erreur.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-dataviz_elyes_donia">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-dataviz_elyes_donia" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Elyes Maalel.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
