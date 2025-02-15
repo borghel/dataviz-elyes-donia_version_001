@@ -4,8 +4,8 @@ import logging
 import matplotlib.pyplot as plt
 import re  # ✅ Ajout de l'importation pour l'extraction du code
 
-# Importation des modules d'IA
-from ai_engine import generate_recommendations, detect_anomalies, call_llm_for_viz, exec_generated_code
+# Importation des modules développés
+from kpi_dashboard import display_kpi_dashboard
 
 # Chargement de la clé API depuis le fichier .env
 from dotenv import load_dotenv
@@ -26,7 +26,7 @@ def main():
 
     pages = {
         "🏠 Accueil": "home",
-        "💬 Generation IA Avancées": "ai_analytics"
+        "📈 Tableau de Bord des KPI": "kpi_dashboard"
     }
 
     selected_page = st.sidebar.radio("Choisissez une page :", list(pages.keys()))
@@ -35,59 +35,14 @@ def main():
         st.title("📊 DataViz Project Elyes-Donia")
         st.markdown("""
             **Cette application vous permet de :**
-            - Générer des **recommandations IA** basées sur vos données.
-            - Obtenir des **interprétations visuelles et analytiques** de vos données.
+            - Suivre vos **KPI en temps réel**.
+            - Explorer les **relations cachées** entre les variables.
         """)
 
-    elif selected_page == "💬 Generation IA Avancées":
-        uploaded_file = st.file_uploader("📂 Téléchargez votre fichier de données pour l'analyse IA :", type=["csv", "xlsx"])
+    elif selected_page == "📈 Tableau de Bord des KPI":
+        uploaded_file = st.file_uploader("📂 Téléchargez votre fichier de données (CSV, Excel) :", type=["csv", "xlsx"])
         if uploaded_file:
-            df = pd.read_csv(uploaded_file) if uploaded_file.name.endswith(".csv") else pd.read_excel(uploaded_file)
-
-            st.subheader("🔍 Génération de Summary et Recommandations IA")
-            if st.button("🚀 Générer des Recommandations"):
-                with st.spinner("Analyse en cours..."):
-                    recommendations = generate_recommendations(df, API_KEY)
-                    st.success("✅ Recommandations générées avec succès !")
-                    st.markdown(recommendations)
-
-            st.subheader("⚠️ Détection d'Anomalies")
-            if st.button("🔎 Détecter des Anomalies"):
-                with st.spinner("Analyse des anomalies en cours..."):
-                    anomalies = detect_anomalies(df, API_KEY)
-                    st.success("✅ Anomalies détectées avec succès !")
-                    st.markdown(anomalies)
-
-            # ✅ Nouvelle fonctionnalité : Génération de visualisations personnalisées
-            st.subheader("📊 Génération de Visualisations")
-            user_prompt = st.text_area("📝 Décrivez la visualisation souhaitée :", 
-                                       placeholder="Exemple : Affiche un histogramme des ventes par mois")
-
-            if st.button("🎨 Générer la Visualisation"):
-                if user_prompt.strip():
-                    with st.spinner("⏳ Génération du code de visualisation..."):
-                        try:
-                            generated_code = call_llm_for_viz(df, user_prompt, API_KEY)
-                            st.subheader("🖥️ Code Généré par l'IA")
-                            st.code(generated_code, language="python")
-
-                            # ✅ Extraction du code Python à partir des balises
-                            match = re.search(r"```python\n(.*?)```", generated_code, re.DOTALL)
-                            if match:
-                                python_code = match.group(1)
-                                try:
-                                    exec_generated_code(python_code, df)  # ✅ Exécuter uniquement le code extrait
-                                except Exception as exec_error:
-                                    st.error(f"❌ Erreur d'exécution du code généré : {exec_error}")
-                                    logger.error(f"❌ Erreur d'exécution : {exec_error}")
-                            else:
-                                st.warning("⚠️ Aucune balise de code Python détectée.")
-
-                        except Exception as e:
-                            st.error(f"❌ Erreur lors de la génération de la visualisation : {e}")
-                            logger.error(f"❌ Erreur : {e}")
-                else:
-                    st.warning("⚠️ Veuillez décrire la visualisation souhaitée.")
+            display_kpi_dashboard(uploaded_file)
 
 if __name__ == "__main__":
     main()
