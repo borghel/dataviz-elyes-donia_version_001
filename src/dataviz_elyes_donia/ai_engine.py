@@ -3,7 +3,10 @@ import streamlit as st
 import logging
 import base64
 import pandas as pd
-from io import BytesIO
+import matplotlib.pyplot as plt  # ✅ Import manquant
+import seaborn as sns            # ✅ Import manquant
+import plotly.express as px      # ✅ Import manquant
+import numpy as np               # ✅ Import manquant
 
 # ✅ Configuration des logs
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
@@ -70,7 +73,7 @@ def detect_anomalies(df, api_key):
     """
     return send_request_to_claude(client, prompt)
 
-# ✅ Générer des visualisations personnalisées
+# ✅ Générer des visualisations personnalisées sans texte explicatif
 def call_llm_for_viz(df, user_prompt, api_key):
     client = initialize_ai_client(api_key)
     dataset_summary = f"""
@@ -82,60 +85,48 @@ def call_llm_for_viz(df, user_prompt, api_key):
     """
 
     prompt = f"""
-    Tu es un expert en visualisation de données avec Python. En utilisant le DataFrame suivant :
-    
+    Tu es un expert en visualisation de données avec Python.
+    En utilisant le DataFrame suivant nommé `df` :
+
     {dataset_summary}
 
     Crée un code Python pour générer la visualisation suivante :
     {user_prompt}
 
-    Contraintes :
-    - Utilise uniquement matplotlib, seaborn, ou plotly.
-    - Donne uniquement le code Python entre balises ```python.
-    - Le DataFrame est déjà chargé sous le nom 'df'.
-    - Remplace plt.show() par st.pyplot(plt) pour compatibilité avec Streamlit.
-    - Inclure des graphiques pertinents comme les histogrammes, heatmaps, diagrammes de corrélation, etc.
+    **Contraintes importantes :**
+    - Donne uniquement le code Python sans aucune explication.
+    - Le code doit être entouré par des balises ```python et ``` pour faciliter l'extraction.
+    - Utilise uniquement `matplotlib`, `seaborn` ou `plotly`.
+    - Remplace `plt.show()` par `st.pyplot(plt)` pour Streamlit.
     """
     return send_request_to_claude(client, prompt, max_tokens=1500)
-
-# ✅ Générer une interprétation IA des données et d'une image
-def interpret_data(df, image_file, api_key):
-    client = initialize_ai_client(api_key)
-    image_base64 = base64.b64encode(image_file.read()).decode("utf-8")
-    recommendations = generate_recommendations(df, api_key)
-
-    prompt = f"""
-    Tu es un expert en analyse de données et en interprétation visuelle. On te fournit :
-    1. Une image en entrée décrivant le contexte des données.
-    2. Un dataset analysé et visualisé sous forme de graphique.
-    3. Des recommandations générées à partir de l'analyse des données.
-
-    Ta mission :
-    - Explique les insights clés du dataset en relation avec l'image fournie.
-    - Compare les résultats de la visualisation avec le contexte de l'image.
-    - Mets en évidence les recommandations pertinentes pour cette situation.
-
-    Voici les éléments :
-    - 📊 Données (Résumé) : {df.describe(include='all').to_string()}
-    - 📷 Image fournie (en base64) : {image_base64}
-    - 🔍 Recommandations IA : {recommendations}
-
-    Fournis une interprétation détaillée sous forme de rapport.
-    """
-    return send_request_to_claude(client, prompt)
 
 # ✅ Exécuter dynamiquement du code Python généré par l'IA
 def exec_generated_code(code: str, df: pd.DataFrame):
     try:
+        # ✅ Importation des modules nécessaires pour l'exécution du code généré
         exec_globals = {
             "st": st,
             "pd": pd,
-            "plt": __import__("matplotlib.pyplot"),
-            "sns": __import__("seaborn"),
-            "px": __import__("plotly.express"),
+            "plt": plt,   # ✅ Importation correcte de matplotlib.pyplot
+            "sns": sns,
+            "px": px,
+            "np": np,     # ✅ Ajout de numpy pour les calculs mathématiques
             "df": df
         }
-        exec(code, exec_globals)
+        
+        # ✅ Compilation du code pour vérifier les erreurs de syntaxe
+        compiled_code = compile(code, "<string>", "exec")
+        
+        # ✅ Exécution du code compilé
+        exec(compiled_code, exec_globals)
+        
+    except SyntaxError as syntax_err:
+        error_message = (f"Erreur de syntaxe détectée : "
+                         f"Ligne {syntax_err.lineno}, "
+                         f"Colonne {syntax_err.offset} -> {syntax_err.text.strip()}")
+        logger.error(f"❌ {error_message}")
+        st.error(error_message)
     except Exception as e:
         logger.error(f"❌ Erreur lors de l'exécution du code généré : {e}")
         st.error(f"Erreur lors de l'exécution du code généré : {e}")

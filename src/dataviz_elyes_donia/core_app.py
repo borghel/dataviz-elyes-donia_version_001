@@ -2,10 +2,9 @@ import streamlit as st
 import pandas as pd
 import logging
 import matplotlib.pyplot as plt
+import re  # ✅ Ajout de l'importation pour l'extraction du code
 
-# Importation des modules développés
-from kpi_dashboard import display_kpi_dashboard
-from interpretation import display_interpretation
+# Importation des modules d'IA
 from ai_engine import generate_recommendations, detect_anomalies, call_llm_for_viz, exec_generated_code
 
 # Chargement de la clé API depuis le fichier .env
@@ -27,8 +26,6 @@ def main():
 
     pages = {
         "🏠 Accueil": "home",
-        "📈 Tableau de Bord des KPI": "kpi_dashboard",
-        "🧠 Interprétation IA": "interpretation",
         "💬 Generation IA Avancées": "ai_analytics"
     }
 
@@ -38,19 +35,9 @@ def main():
         st.title("📊 DataViz Project Elyes-Donia")
         st.markdown("""
             **Cette application vous permet de :**
-            - Suivre vos **KPI en temps réel**.
-            - Explorer les **relations cachées** entre les variables.
             - Générer des **recommandations IA** basées sur vos données.
             - Obtenir des **interprétations visuelles et analytiques** de vos données.
         """)
-
-    elif selected_page == "📈 Tableau de Bord des KPI":
-        uploaded_file = st.file_uploader("📂 Téléchargez votre fichier de données (CSV, Excel) :", type=["csv", "xlsx"])
-        if uploaded_file:
-            display_kpi_dashboard(uploaded_file)
-
-    elif selected_page == "🧠 Interprétation IA":
-        display_interpretation()
 
     elif selected_page == "💬 Generation IA Avancées":
         uploaded_file = st.file_uploader("📂 Téléchargez votre fichier de données pour l'analyse IA :", type=["csv", "xlsx"])
@@ -84,8 +71,17 @@ def main():
                             st.subheader("🖥️ Code Généré par l'IA")
                             st.code(generated_code, language="python")
 
-                            st.subheader("📈 Visualisation Générée")
-                            exec_generated_code(generated_code, df)  # Exécuter le code généré pour afficher le graphique
+                            # ✅ Extraction du code Python à partir des balises
+                            match = re.search(r"```python\n(.*?)```", generated_code, re.DOTALL)
+                            if match:
+                                python_code = match.group(1)
+                                try:
+                                    exec_generated_code(python_code, df)  # ✅ Exécuter uniquement le code extrait
+                                except Exception as exec_error:
+                                    st.error(f"❌ Erreur d'exécution du code généré : {exec_error}")
+                                    logger.error(f"❌ Erreur d'exécution : {exec_error}")
+                            else:
+                                st.warning("⚠️ Aucune balise de code Python détectée.")
 
                         except Exception as e:
                             st.error(f"❌ Erreur lors de la génération de la visualisation : {e}")
