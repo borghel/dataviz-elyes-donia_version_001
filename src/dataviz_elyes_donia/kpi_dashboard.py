@@ -24,6 +24,8 @@ def display_kpi_dashboard(file):
     numeric_cols = df_transformed.select_dtypes(include=[np.number]).columns.tolist()
     selected_kpis = st.sidebar.multiselect("Sélectionnez les KPI à suivre", numeric_cols, default=numeric_cols[:2])
 
+    alert_thresholds = {kpi: st.sidebar.slider(f"Seuil d'alerte pour {kpi}", 0.0, 1.0, 0.8) for kpi in selected_kpis}
+
     st.subheader("📊 KPI en Direct")
     cols = st.columns(len(selected_kpis))
 
@@ -32,6 +34,9 @@ def display_kpi_dashboard(file):
         delta = current_value - df_transformed[kpi].iloc[-2] if len(df_transformed) > 1 else 0
 
         cols[i].metric(label=kpi, value=f"{current_value:.2f}", delta=f"{delta:+.2%}")
+
+        if current_value >= alert_thresholds[kpi]:
+            cols[i].warning(f"⚠️ Alerte : {kpi} dépasse le seuil de {alert_thresholds[kpi]}")
 
     st.subheader("📈 Tendances des KPI")
     for kpi in selected_kpis:
