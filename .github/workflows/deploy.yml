@@ -7,26 +7,26 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Exécution sur un environnement Ubuntu
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3  # Récupère le code source du dépôt
 
       - name: Setup Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v4  # Configure l'environnement Python
         with:
-          python-version: "3.10"
+          python-version: "3.10"  # Utilise Python 3.10
 
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt
+          pip install -r requirements.txt  # Installe les dépendances
 
       - name: Create secrets.toml
         run: |
-          mkdir -p ~/.streamlit
-          echo "[api]" > ~/.streamlit/secrets.toml
-          echo "key = \"${{ secrets.API_KEY }}\"" >> ~/.streamlit/secrets.toml
+          mkdir -p ~/.streamlit  # Crée le répertoire .streamlit
+          echo "[api]" > ~/.streamlit/secrets.toml  # Crée le fichier secrets.toml
+          echo "key = \"${{ secrets.API_KEY }}\"" >> ~/.streamlit/secrets.toml  # Ajoute ta clé API
 
       - name: Deploy Streamlit
-        run: streamlit run kpi_dashboard.py
+        run: streamlit run kpi_dashboard.py  # Lance l'application Streamlit
