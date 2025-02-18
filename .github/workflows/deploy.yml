@@ -1,0 +1,32 @@
+name: Deploy Streamlit App
+
+on:
+  push:
+    branches:
+      - main  # Déclenche le workflow à chaque push sur la branche main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Create secrets.toml
+        run: |
+          mkdir -p ~/.streamlit
+          echo "[api]" > ~/.streamlit/secrets.toml
+          echo "key = \"${{ secrets.API_KEY }}\"" >> ~/.streamlit/secrets.toml
+
+      - name: Deploy Streamlit
+        run: streamlit run app.py
