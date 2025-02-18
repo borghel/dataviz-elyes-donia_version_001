@@ -29,4 +29,4 @@ jobs:
           echo "key = \"${{ secrets.API_KEY }}\"" >> ~/.streamlit/secrets.toml
 
       - name: Deploy Streamlit
-        run: streamlit run app.py
+        run: streamlit run kpi_dashboard.py
